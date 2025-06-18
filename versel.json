@@ -3,15 +3,23 @@
   "builds": [
     {
       "src": "app.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": { 
+        "maxLambdaSize": "15mb",
+        "includeFiles": ["knowledge_base.db", "*.json", "*.md"]
+      }
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/query",
       "dest": "app.py",
-      "methods": ["GET", "POST"]
+      "methods": ["POST"]
+    },
+    {
+      "src": "/(.*)",
+      "status": 404,
+      "dest": "app.py"
     }
-  ],
-  "public": true
+  ]
 }

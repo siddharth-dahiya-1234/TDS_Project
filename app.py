@@ -594,7 +594,9 @@ def parse_llm_response(response):
             "answer": "Error parsing the response from the language model.",
             "links": []
         }
-
+@app.get("/")
+def root():
+    return {"message": "API is up and running"}
 # Define API routes
 @app.post("/query")
 async def query_knowledge_base(request: QueryRequest):
